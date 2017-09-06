@@ -32,3 +32,8 @@ Route::get('/chat', function () {
 
 // Messages CRUD methods
 Route::resource('messages', 'MessageController')->middleware('auth');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

@@ -16459,7 +16459,7 @@ module.exports = __webpack_require__(172);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vee_validate__ = __webpack_require__(157);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vee_validate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vee_validate__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_messageHandling__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_messageHandling__ = __webpack_require__(171);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -16524,7 +16524,7 @@ var app = new Vue({
 
     /* 
       Open channel between all logged in users
-       start listening and maintain a list of active users
+        start listening and maintain a list of active users
     */
     Echo.join('chatroom').here(function (users) {
       _this.onlineusers = users;
@@ -70575,7 +70575,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "C:\\laragon\\www\\chatdemo\\resources\\assets\\js\\components\\chat\\Log.vue"
+Component.options.__file = "E:\\laragon\\www\\laraVueChat\\resources\\assets\\js\\components\\chat\\Log.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Log.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -70586,9 +70586,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-63cdae5c", Component.options)
+    hotAPI.createRecord("data-v-0adf2bef", Component.options)
   } else {
-    hotAPI.reload("data-v-63cdae5c", Component.options)
+    hotAPI.reload("data-v-0adf2bef", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -70672,7 +70672,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-63cdae5c", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-0adf2bef", module.exports)
   }
 }
 
@@ -70693,7 +70693,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "C:\\laragon\\www\\chatdemo\\resources\\assets\\js\\components\\chat\\Message.vue"
+Component.options.__file = "E:\\laragon\\www\\laraVueChat\\resources\\assets\\js\\components\\chat\\Message.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Message.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -70704,9 +70704,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-46d89cc2", Component.options)
+    hotAPI.createRecord("data-v-7cb62db2", Component.options)
   } else {
-    hotAPI.reload("data-v-46d89cc2", Component.options)
+    hotAPI.reload("data-v-7cb62db2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -70886,7 +70886,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-46d89cc2", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-7cb62db2", module.exports)
   }
 }
 
@@ -70907,7 +70907,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "C:\\laragon\\www\\chatdemo\\resources\\assets\\js\\components\\chat\\NewMessage.vue"
+Component.options.__file = "E:\\laragon\\www\\laraVueChat\\resources\\assets\\js\\components\\chat\\NewMessage.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] NewMessage.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -70918,9 +70918,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e016b242", Component.options)
+    hotAPI.createRecord("data-v-c60d6428", Component.options)
   } else {
-    hotAPI.reload("data-v-e016b242", Component.options)
+    hotAPI.reload("data-v-c60d6428", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -71064,7 +71064,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-e016b242", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-c60d6428", module.exports)
   }
 }
 
@@ -71085,7 +71085,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "C:\\laragon\\www\\chatdemo\\resources\\assets\\js\\components\\chat\\ShowUsers.vue"
+Component.options.__file = "E:\\laragon\\www\\laraVueChat\\resources\\assets\\js\\components\\chat\\ShowUsers.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ShowUsers.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -71096,9 +71096,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-dd7feeba", Component.options)
+    hotAPI.createRecord("data-v-9a986814", Component.options)
   } else {
-    hotAPI.reload("data-v-dd7feeba", Component.options)
+    hotAPI.reload("data-v-9a986814", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -71148,23 +71148,12 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-dd7feeba", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-9a986814", module.exports)
   }
 }
 
 /***/ }),
-/* 171 */,
-/* 172 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 173 */,
-/* 174 */,
-/* 175 */,
-/* 176 */,
-/* 177 */
+/* 171 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -71216,6 +71205,12 @@ if (false) {
     });
   }
 });
+
+/***/ }),
+/* 172 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
