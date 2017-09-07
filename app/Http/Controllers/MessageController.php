@@ -19,7 +19,7 @@ class MessageController extends Controller
     public function index()
     {
         //
-        return Message::with('user')->orderBy('created_at', 'desc')->get();
+        return Message::with('user')->orderBy('created_at', 'ASC')->get();
     }
 
     /**
@@ -90,8 +90,8 @@ class MessageController extends Controller
         $msg = Message::find($id);
 
         if ($msg && $msg->user_id == Auth::id()) {
-            event(new MessageUpdated($msg, Auth::user())); 
             $msg->update(['message' => $request->message]);
+            event(new MessageUpdated($msg, Auth::user())); 
             return 'updated';
         }
         return 'failed!';

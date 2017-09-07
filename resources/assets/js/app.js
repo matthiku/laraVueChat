@@ -25,6 +25,7 @@ require('./components/components');
  *
  */
 import methods from './app/messageHandling';
+import channel from './app/channelHandling';
 
 // create a direct communications bus
 var bus = new Vue();
@@ -39,7 +40,7 @@ const app = new Vue({
   el: '#app',
 
   data: {
-    messages: [],
+    messages: {},
     user: {},
     onlineusers: [],
     bus: bus,
@@ -57,60 +58,14 @@ const app = new Vue({
     this.bus.$on('update-message', (id) => {
       this.editMessage(id); 
     });
-
-    /* 
-      Open channel between all logged in users
-
-      start listening and maintain a list of active users
-    */
-    Echo.join('chatroom')
-
-      .here((users) => {
-          this.onlineusers = users;
-      })
-      .joining((user) => {
-          if (_.findIndex(this.onlineusers, (o) => { return o.id == user.id; }) < 0)
-            this.onlineusers.push(user);
-      })
-      .leaving((user) => {
-          this.onlineusers = this.onlineusers.filter( (elem) => { return elem.id != user.id } );
-      })
-
-      .listen('MessagePosted', (e) => {
-        if (e.message && e.message.message) {
-          var msg = e.message;
-          msg.user = e.user;
-          this.messages.unshift(msg);
-        }
-        else {
-          console.log('Event MessagePosted returned incorrect value!');
-          console.log(e);
-        }
-      })
-      .listen('MessageUpdated', (e) => {
-        console.log('MessageUpdated:');
-        console.log(e);
-        if (e.message && e.message.message) {
-          var msg = e.message;
-          msg.user = e.user;
-          this.messages.unshift(msg);
-        }
-        else {
-          console.log('Event MessagePosted returned incorrect value!');
-          console.log(e);
-        }
-      })
-      .listen('MessageDeleted', (id) => {
-        if (id && id.message_id) {
-          // remove the deleted message from the local array
-          this.messages = this.messages.filter( (elem) => { return elem.id != id.message_id } );
-        }
-        else {
-          console.log('Event MessageDeleted returned incorrect value!');
-          console.log(id);
-        }
-      })
-    ;
   },
+
+  mounted: channel,
+
+  updated () {
+    // scroll down to the new message
+    window.location.href = '#new-chat-message'    
+  },
+
 
 });

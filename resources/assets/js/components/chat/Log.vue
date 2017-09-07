@@ -3,9 +3,8 @@
     <div class="row">
       <div class="w-100">
         <div class="card">
-          <div class="card-header">Chat Log</div>
 
-          <div class="card-body">
+          <div class="card-body p-0">
             <ul class="list-group">
               <chat-message 
                   v-for="message in messages" 

@@ -16460,6 +16460,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vee_validate__ = __webpack_require__(157);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vee_validate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vee_validate__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_messageHandling__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_channelHandling__ = __webpack_require__(177);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -16488,6 +16489,7 @@ __webpack_require__(158);
  */
 
 
+
 // create a direct communications bus
 var bus = new Vue();
 
@@ -16501,7 +16503,7 @@ var app = new Vue({
   el: '#app',
 
   data: {
-    messages: [],
+    messages: {},
     user: {},
     onlineusers: [],
     bus: bus
@@ -16521,52 +16523,14 @@ var app = new Vue({
     this.bus.$on('update-message', function (id) {
       _this.editMessage(id);
     });
+  },
 
-    /* 
-      Open channel between all logged in users
-        start listening and maintain a list of active users
-    */
-    Echo.join('chatroom').here(function (users) {
-      _this.onlineusers = users;
-    }).joining(function (user) {
-      if (_.findIndex(_this.onlineusers, function (o) {
-        return o.id == user.id;
-      }) < 0) _this.onlineusers.push(user);
-    }).leaving(function (user) {
-      _this.onlineusers = _this.onlineusers.filter(function (elem) {
-        return elem.id != user.id;
-      });
-    }).listen('MessagePosted', function (e) {
-      if (e.message && e.message.message) {
-        var msg = e.message;
-        msg.user = e.user;
-        _this.messages.unshift(msg);
-      } else {
-        console.log('Event MessagePosted returned incorrect value!');
-        console.log(e);
-      }
-    }).listen('MessageUpdated', function (e) {
-      console.log('MessageUpdated:');
-      console.log(e);
-      if (e.message && e.message.message) {
-        var msg = e.message;
-        msg.user = e.user;
-        _this.messages.unshift(msg);
-      } else {
-        console.log('Event MessagePosted returned incorrect value!');
-        console.log(e);
-      }
-    }).listen('MessageDeleted', function (id) {
-      if (id && id.message_id) {
-        // remove the deleted message from the local array
-        _this.messages = _this.messages.filter(function (elem) {
-          return elem.id != id.message_id;
-        });
-      } else {
-        console.log('Event MessageDeleted returned incorrect value!');
-        console.log(id);
-      }
-    });
+
+  mounted: __WEBPACK_IMPORTED_MODULE_2__app_channelHandling__["a" /* default */],
+
+  updated: function updated() {
+    // scroll down to the new message
+    window.location.href = '#new-chat-message';
   }
 });
 
@@ -70575,7 +70539,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "E:\\laragon\\www\\laraVueChat\\resources\\assets\\js\\components\\chat\\Log.vue"
+Component.options.__file = "C:\\laragon\\www\\chatdemo\\resources\\assets\\js\\components\\chat\\Log.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Log.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -70586,9 +70550,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0adf2bef", Component.options)
+    hotAPI.createRecord("data-v-63cdae5c", Component.options)
   } else {
-    hotAPI.reload("data-v-0adf2bef", Component.options)
+    hotAPI.reload("data-v-63cdae5c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -70604,7 +70568,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -70652,9 +70615,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "card"
   }, [_c('div', {
-    staticClass: "card-header"
-  }, [_vm._v("Chat Log")]), _vm._v(" "), _c('div', {
-    staticClass: "card-body"
+    staticClass: "card-body p-0"
   }, [_c('ul', {
     staticClass: "list-group"
   }, _vm._l((_vm.messages), function(message) {
@@ -70672,7 +70633,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0adf2bef", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-63cdae5c", module.exports)
   }
 }
 
@@ -70693,7 +70654,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "E:\\laragon\\www\\laraVueChat\\resources\\assets\\js\\components\\chat\\Message.vue"
+Component.options.__file = "C:\\laragon\\www\\chatdemo\\resources\\assets\\js\\components\\chat\\Message.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Message.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -70704,9 +70665,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7cb62db2", Component.options)
+    hotAPI.createRecord("data-v-46d89cc2", Component.options)
   } else {
-    hotAPI.reload("data-v-7cb62db2", Component.options)
+    hotAPI.reload("data-v-46d89cc2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -70750,6 +70711,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -70758,15 +70728,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       ownMessage: false,
-      editing: false
+      editing: false,
+      updated: false
     };
   },
 
 
   computed: {
-    formattedDate: function formattedDate() {
-      // format date depending on age
+    createdDate: function createdDate() {
+      // format the displayed date-time depending on age
       var d = moment(this.message.created_at);
+      if (d.isSame(moment(), 'day')) return d.format("LTS");
+      if (d.isSame(moment(), 'week')) return d.format("ddd, HH:mm");
+      return d.format("lll");
+    },
+    editedDate: function editedDate() {
+      // format the displayed date-time depending on age
+      var d = moment(this.message.updated_at);
       if (d.isSame(moment(), 'day')) return d.format("LTS");
       if (d.isSame(moment(), 'week')) return d.format("ddd, HH:mm");
       return d.format("lll");
@@ -70774,18 +70752,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    clickOnMessage: function clickOnMessage() {
+      // only accept a click if the user owns this message
+      if (this.ownMessage) {
+        this.editing = !this.editing;
+        if (this.editing) setTimeout(this.setFocus, 200);
+      }
+    },
+    setFocus: function setFocus() {
+      var elem = document.getElementById('message-text-id-' + this.message.id);
+      elem.focus();
+      // now make sure the caret is at the end of the text
+      var range, selection;
+      if (document.createRange) //Firefox, Chrome, Opera, Safari, IE 9+
+        {
+          range = document.createRange(); //Create a range (a range is a like the selection but invisible)
+          range.selectNodeContents(elem); //Select the entire contents of the element with the range
+          range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
+          selection = window.getSelection(); //get the selection object (allows you to change selection)
+          selection.removeAllRanges(); //remove any selections already made
+          selection.addRange(range); //make the range you have just created the visible selection
+        }
+    },
     deleteMessage: function deleteMessage() {
+      // send event to delete a message -> messageHandling.js
       this.bus.$emit('delete-message', this.message.id);
     },
     updateMessage: function updateMessage() {
+      // send event to update a message -> messageHandling.js
+
+      // first, read updated message text and apply it to the message object
       this.message.message = $('#message-text-id-' + this.message.id).text();
+      // now send the event
       this.bus.$emit('update-message', this.message);
+      // restore non-editing mode 
       this.editing = false;
     }
   },
 
   mounted: function mounted() {
+    // check if current message belongs to current user
     if (this.message.user_id == this.user.id) this.ownMessage = true;
+    // check if message was updated after first publishing
+    if (this.message.updated_at != this.message.created_at) this.updated = true;
   },
 
 
@@ -70804,7 +70813,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', {
     staticClass: "list-group-item",
-    class: _vm.ownMessage ? 'bg-light' : ''
+    class: _vm.ownMessage ? 'bg-light text-right' : ''
   }, [_c('p', {
     directives: [{
       name: "show",
@@ -70814,43 +70823,42 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "mb-1",
     on: {
-      "click": function($event) {
-        _vm.editing = !_vm.editing
-      }
+      "click": _vm.clickOnMessage
     }
-  }, [_vm._v(_vm._s(_vm.message.message))]), _vm._v(" "), _c('p', {
+  }, [_vm._v(_vm._s(_vm.message.message))]), _vm._v(" "), (_vm.ownMessage) ? _c('p', {
     directives: [{
       name: "show",
       rawName: "v-show",
       value: (_vm.editing),
       expression: "editing"
     }],
-    staticClass: "mb-1 border border-primary",
+    staticClass: "mb-1 border border-primary px-2 text-left",
     attrs: {
       "contenteditable": "",
       "id": 'message-text-id-' + _vm.message.id
     },
     domProps: {
       "innerHTML": _vm._s(_vm.message.message)
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "d-flex justify-content-between"
-  }, [_c('div', {
-    staticClass: "small text-white rounded p-1",
-    class: _vm.ownMessage ? 'bg-primary' : 'bg-secondary'
-  }, [_vm._v("\n      " + _vm._s(_vm.message.user.name) + " \n    ")]), _vm._v(" "), (_vm.ownMessage) ? _c('div', {
-    staticClass: "small"
-  }, [_c('a', {
-    staticClass: "btn btn-sm btn-primary",
-    attrs: {
-      "href": "#"
     },
     on: {
-      "click": function($event) {
-        _vm.editing = !_vm.editing
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.updateMessage($event)
       }
     }
-  }, [_vm._v(_vm._s(_vm.editing ? 'cancel' : 'edit'))]), _vm._v(" "), _c('a', {
+  }) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "d-flex justify-content-between"
+  }, [(!_vm.ownMessage) ? _c('div', {
+    staticClass: "small text-white rounded p-1",
+    class: _vm.ownMessage ? 'bg-primary' : 'bg-secondary'
+  }, [_vm._v("\n      " + _vm._s(_vm.message.user.name) + " \n    ")]) : _vm._e(), _vm._v(" "), (_vm.ownMessage) ? _c('div', {
+    staticClass: "small"
+  }, [_c('button', {
+    staticClass: "btn btn-sm btn-primary",
+    on: {
+      "click": _vm.clickOnMessage
+    }
+  }, [_vm._v(_vm._s(_vm.editing ? 'cancel' : 'edit'))]), _vm._v(" "), _c('button', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -70858,13 +70866,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "editing"
     }],
     staticClass: "btn btn-sm btn-success",
-    attrs: {
-      "href": "#"
-    },
     on: {
       "click": _vm.updateMessage
     }
-  }, [_vm._v("send")]), _vm._v(" "), _c('a', {
+  }, [_vm._v("send")]), _vm._v(" "), _c('button', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -70872,21 +70877,26 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "!editing"
     }],
     staticClass: "btn btn-sm btn-danger",
-    attrs: {
-      "href": "#"
-    },
     on: {
       "click": _vm.deleteMessage
     }
   }, [_vm._v("delete")])]) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "small text-info"
-  }, [_vm._v("\n      " + _vm._s(_vm.formattedDate) + "\n    ")])])])
+    staticClass: "small text-info",
+    attrs: {
+      "title": _vm.message.created_at
+    }
+  }, [_vm._v("\n      " + _vm._s(_vm.createdDate) + "\n      "), (_vm.updated) ? _c('span', {
+    staticClass: "small text-warning",
+    attrs: {
+      "title": _vm.message.updated_at
+    }
+  }, [_vm._v("\n        (edited: " + _vm._s(_vm.editedDate) + ")")]) : _vm._e()])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-7cb62db2", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-46d89cc2", module.exports)
   }
 }
 
@@ -70895,19 +70905,23 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(178)
+}
 var Component = __webpack_require__(3)(
   /* script */
   __webpack_require__(166),
   /* template */
-  __webpack_require__(167),
+  __webpack_require__(182),
   /* styles */
-  null,
+  injectStyle,
   /* scopeId */
-  null,
+  "data-v-e016b242",
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "E:\\laragon\\www\\laraVueChat\\resources\\assets\\js\\components\\chat\\NewMessage.vue"
+Component.options.__file = "C:\\laragon\\www\\chatdemo\\resources\\assets\\js\\components\\chat\\NewMessage.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] NewMessage.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -70918,9 +70932,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c60d6428", Component.options)
+    hotAPI.createRecord("data-v-e016b242", Component.options)
   } else {
-    hotAPI.reload("data-v-c60d6428", Component.options)
+    hotAPI.reload("data-v-e016b242", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -70936,16 +70950,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -70994,81 +70998,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 167 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container mb-2"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "w-100"
-  }, [_c('div', {
-    staticClass: "card"
-  }, [_c('div', {
-    staticClass: "card-header"
-  }, [_vm._v("New Message")]), _vm._v(" "), _c('div', {
-    staticClass: "card-body"
-  }, [_c('div', {
-    staticClass: "d-flex"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.messageText),
-      expression: "messageText"
-    }],
-    staticClass: "w-100",
-    attrs: {
-      "type": "text",
-      "placeholder": "enter your message and press Enter"
-    },
-    domProps: {
-      "value": (_vm.messageText)
-    },
-    on: {
-      "keyup": function($event) {
-        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
-        _vm.sendMessage($event)
-      },
-      "keydown": function($event) {
-        _vm.errorText = ''
-      },
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.messageText = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary rounded-0 rounded-right",
-    class: _vm.messageText ? '' : 'disabled',
-    attrs: {
-      "type": "button",
-      "title": _vm.messageText ? '' : 'disabled - enter your message first'
-    },
-    on: {
-      "click": _vm.sendMessage
-    }
-  }, [_vm._v("Send")])]), _vm._v(" "), _c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.errorText),
-      expression: "errorText"
-    }],
-    staticClass: "alert alert-danger"
-  }, [_vm._v("\n            ❗ " + _vm._s(_vm.errorText) + "\n          ")])])])])])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-c60d6428", module.exports)
-  }
-}
-
-/***/ }),
+/* 167 */,
 /* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -71085,7 +71015,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "E:\\laragon\\www\\laraVueChat\\resources\\assets\\js\\components\\chat\\ShowUsers.vue"
+Component.options.__file = "C:\\laragon\\www\\chatdemo\\resources\\assets\\js\\components\\chat\\ShowUsers.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ShowUsers.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -71096,9 +71026,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-9a986814", Component.options)
+    hotAPI.createRecord("data-v-dd7feeba", Component.options)
   } else {
-    hotAPI.reload("data-v-9a986814", Component.options)
+    hotAPI.reload("data-v-dd7feeba", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -71148,7 +71078,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-9a986814", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-dd7feeba", module.exports)
   }
 }
 
@@ -71172,15 +71102,15 @@ if (false) {
     });
   },
   addMessage: function addMessage(payload) {
+    // send the new message to the backend
     axios.post('/messages', { message: payload }).then(function (response) {
+      // once the backend processed the new message, it will be broadcasted
       // console.log(response);
-      // this.getAllMessages();
     });
   },
   editMessage: function editMessage(payload) {
     var _this2 = this;
 
-    console.log('editMessage method: ' + payload.message);
     axios.patch('/messages/' + payload.id, payload).then(function (response) {
       if (response.data == 'updated') _this2.getAllMessages();else console.log(response);
     });
@@ -71188,12 +71118,13 @@ if (false) {
   deleteMessage: function deleteMessage(payload) {
     var _this3 = this;
 
+    if (parseInt(payload) == isNaN) return;
     axios.delete('/messages/' + payload).then(function (response) {
       if (response.data == 'destroyed') {
         _this3.messages = _this3.messages.filter(function (elem) {
           return elem.id != payload;
         });
-      }
+      } else console.log(response);
     });
   },
   getCurrentUser: function getCurrentUser() {
@@ -71211,6 +71142,514 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 173 */,
+/* 174 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+/* 175 */,
+/* 176 */,
+/* 177 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/*
+
+  Open and maintain the Websockets channel between Laravel's backend and this frontend
+
+*/
+/* harmony default export */ __webpack_exports__["a"] = (function () {
+  var _this = this;
+
+  /* 
+    Open channel between all logged in users
+      start listening and maintain a list of active users
+  */
+  Echo.join('chatroom').here(function (users) {
+    // receivin glist of all currently online users
+    _this.onlineusers = users;
+  }).joining(function (user) {
+    // another user joined the chatroom
+    if (_.findIndex(_this.onlineusers, function (o) {
+      return o.id == user.id;
+    }) < 0) _this.onlineusers.push(user);
+  }).leaving(function (user) {
+    // a user left the chatroom
+    _this.onlineusers = _this.onlineusers.filter(function (elem) {
+      return elem.id != user.id;
+    });
+  }).listen('MessagePosted', function (e) {
+    // insert the new message at the beginning 
+    if (e.message && e.message.message) {
+      var msg = e.message;
+      msg.user = e.user;
+      _this.messages.push(msg);
+    } else {
+      console.log('Event MessagePosted returned incorrect value!');
+      console.log(e);
+    }
+  }).listen('MessageUpdated', function (e) {
+    if (e.message && e.message.message) {
+      var msg = e.message;
+      msg.user = e.user;
+      var idx = _this.messages.findIndex(function (elem) {
+        return elem.id == e.message.id;
+      });
+      // change the array using the build-in set function in order to trigger the DOM update
+      _this.$set(_this.messages, idx, msg);
+    } else {
+      console.log('Event MessagePosted returned incorrect value!');
+      console.log(e);
+    }
+  }).listen('MessageDeleted', function (id) {
+    if (id && id.message_id) {
+      // remove the deleted message from the local array          
+      _this.messages = _this.messages.filter(function (elem) {
+        return elem.id != id.message_id;
+      });
+    } else {
+      console.log('Event MessageDeleted returned incorrect value!');
+      console.log(id);
+    }
+  });
+});
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(179);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(180)("d5d74d7e", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e016b242\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NewMessage.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e016b242\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NewMessage.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 179 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(174)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\nbutton h2[data-v-e016b242] {\n  line-height: .4;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 180 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(181)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction) {
+  isProduction = _isProduction
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+/* 181 */
+/***/ (function(module, exports) {
+
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+module.exports = function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+
+/***/ }),
+/* 182 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('div', {
+    staticClass: "d-flex"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.messageText),
+      expression: "messageText"
+    }],
+    staticClass: "rounded pl-2 w-100",
+    attrs: {
+      "type": "text",
+      "placeholder": "write something and press Enter"
+    },
+    domProps: {
+      "value": (_vm.messageText)
+    },
+    on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.sendMessage($event)
+      },
+      "keydown": function($event) {
+        _vm.errorText = ''
+      },
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.messageText = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary rounded-0 rounded-right",
+    class: _vm.messageText ? '' : 'disabled',
+    attrs: {
+      "type": "button",
+      "title": _vm.messageText ? '' : 'disabled - enter your message first'
+    },
+    on: {
+      "click": _vm.sendMessage
+    }
+  }, [_c('h2', [_vm._v("🖅")])])]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errorText),
+      expression: "errorText"
+    }],
+    staticClass: "alert alert-danger"
+  }, [_vm._v("\n    ❗ " + _vm._s(_vm.errorText) + "\n  ")])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-e016b242", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

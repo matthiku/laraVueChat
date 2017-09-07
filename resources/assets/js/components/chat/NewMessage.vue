@@ -1,32 +1,22 @@
 <template>
-  <div class="container mb-2">
-    <div class="row">
-      <div class="w-100">
-        <div class="card">
-          <div class="card-header">New Message</div>
-          <div class="card-body">
-
-            <div class="d-flex">              
-              <input type="text" class="w-100" placeholder="enter your message and press Enter"
-                  v-model="messageText"
-                  @keyup.enter="sendMessage"
-                  @keydown="errorText=''"
-              >
-              <button type="button" class="btn btn-primary rounded-0 rounded-right"
-                  :class="messageText ? '' : 'disabled'"
-                  :title="messageText ? '' : 'disabled - enter your message first'"
-                  @click="sendMessage"
-              >Send</button>
-            </div>
-
-            <div v-show="errorText" class="alert alert-danger">
-              &#10071;&nbsp;{{ errorText }}
-            </div>
-
-          </div>
-        </div>
-      </div>
+  <div>
+    <div class="d-flex">
+      <input type="text" class="rounded pl-2 w-100" placeholder="write something and press Enter"
+          v-model="messageText"
+          @keyup.enter="sendMessage"
+          @keydown="errorText=''"
+      >
+      <button type="button" class="btn btn-primary rounded-0 rounded-right"
+          :class="messageText ? '' : 'disabled'"
+          :title="messageText ? '' : 'disabled - enter your message first'"
+          @click="sendMessage"
+      ><h2>&#128389;</h2></button>
     </div>
+
+    <div v-show="errorText" class="alert alert-danger">
+      &#10071;&nbsp;{{ errorText }}
+    </div>
+
   </div>
 </template>
 
@@ -56,3 +46,10 @@
     },
   }
 </script>
+
+
+<style scoped="">
+  button h2 {
+    line-height: .4;
+  }
+</style>
